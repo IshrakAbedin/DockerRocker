@@ -1,0 +1,8 @@
+{
+	"dotnetCoreVersion" : "2.1",
+	"projectPath" : "./api",
+	"testPath" : "./Api.Test",
+	"testEnabled" : true,
+	"buildEnvOutDirectory" : "/out",
+	"dllName" : "netcore-api.dll"
+}

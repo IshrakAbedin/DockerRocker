@@ -1,0 +1,52 @@
+{
+    "environmentCount" : 2,
+    "variables" : ["dotnetCoreVersion", "projectPath", "testPath", "testEnabled", "buildEnvOutDirectory", "dllName"],
+    "createBuildEnvironment" :{
+        "check" : null,
+        "command" : "FROM mcr.microsoft.com/dotnet/core/sdk:~dotnetCoreVersion~ AS build-env"
+    },
+    "setWorkDirectoryInBuildEnvironment" :{
+        "check" : null,
+        "command" : "WORKDIR /app"
+    },
+    "copySolutionFIle" :{
+        "check" : null,
+        "command" : "COPY ./*.sln ./"
+    },
+    "copyProjectDescription" :{
+        "check" : null,
+        "command" : "COPY ~projectPath~/*.csproj ~projectPath~/"
+    },
+    "copyTestDescription" :{
+        "check" : "~testEnabled~",
+        "command" : "COPY ~testPath~/*.csproj ~testPath~/"
+    },
+    "copyAllFiles" :{
+        "check" : null,
+        "command" : "RUN dotnet restore"
+    },
+    "dotnetTest" :{
+        "check" : "~testEnabled~",
+        "command" : "RUN dotnet test"
+    },
+    "publish"   :{
+        "check" : null,
+        "command" : "RUN dotnet publish -c Release -o ~buildEnvOutDirectory~"
+    },
+    "createRunTimeEnvironment" :{
+        "check" : null,
+        "command" : "FROM mcr.microsoft.com/dotnet/core/aspnet:~dotnetCoreVersion~"
+    },
+    "setWorkDirectoryInRuntimeEnvironment" :{
+        "check" : null,
+        "command" : "WORKDIR /app"
+    },
+    "copyDllFromBuildEnvironment" :{
+        "check" : null,
+        "command" : "COPY --from=build-env ~buildEnvOutDirectory~ ."
+    },
+    "setEntryPoint" :{
+        "check" : null,
+        "command" : "ENTRYPOINT dotnet ~dllName~"
+    }
+}
