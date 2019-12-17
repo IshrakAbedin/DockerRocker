@@ -1,0 +1,2 @@
+# DockerRocker - Automater Dockerfile Generator
+An automated modular Dockerfile generator written in Python 3 (3.6+) for generating Dockerfiles automatically from JSON setting parameters based on previously written JSON schemas.
