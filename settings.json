@@ -1,8 +1,9 @@
 {
-	"dotnetCoreVersion" : "2.1",
-	"projectPath" : "./api",
-	"testPath" : "./Api.Test",
+	"pythonVersion" : "3.7.5",
+	"pythonCommand" : "python3",
+	"pipCommand" : "pip3",
+	"requirementsFilePath" : "./requirements.txt",
 	"testEnabled" : true,
-	"buildEnvOutDirectory" : "/out",
-	"dllName" : "netcore-api.dll"
+	"manageFilePath" : "./manage.py",
+	"portNumber" : "8000"
 }

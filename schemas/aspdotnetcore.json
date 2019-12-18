@@ -21,9 +21,13 @@
         "check" : "~testEnabled~",
         "command" : "COPY ~testPath~/*.csproj ~testPath~/"
     },
-    "copyAllFiles" :{
+    "dotnetRestore" :{
         "check" : null,
         "command" : "RUN dotnet restore"
+    },
+    "copyAllFiles" :{
+        "check" : null,
+        "command" : "COPY . ."
     },
     "dotnetTest" :{
         "check" : "~testEnabled~",

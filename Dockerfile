@@ -1,12 +1,8 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:2.1 AS build-env
+FROM python:3.7.5 AS python-env
 WORKDIR /app
-COPY ./*.sln ./
-COPY ./api/*.csproj ./api/
-COPY ./Api.Test/*.csproj ./Api.Test/
-RUN dotnet restore
-RUN dotnet test
-RUN dotnet publish -c Release -o /out
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.1
-WORKDIR /app
-COPY --from=build-env /out .
-ENTRYPOINT dotnet netcore-api.dll
+COPY ./requirements.txt ./
+RUN pip3 install -r ./requirements.txt
+COPY . .
+RUN python3 ./manage.py test
+EXPOSE 8000
+ENTRYPOINT python3 ./manage.py runserver 0.0.0.0:8000

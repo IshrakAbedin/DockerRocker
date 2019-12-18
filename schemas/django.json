@@ -1,0 +1,36 @@
+{
+    "environmentCount" : 1,
+    "variables" : ["pythonVersion", "pythonCommand", "pipCommand", "requirementsFilePath", "testEnabled", "manageFilePath", "portNumber"],
+    "createPythonEnvironment" :{
+        "check" : null,
+        "command" : "FROM python:~pythonVersion~ AS python-env"
+    },
+    "setWorkDirectoryInPythonEnvironment" :{
+        "check" : null,
+        "command" : "WORKDIR /app"
+    },
+    "copyRequirementsFile" :{
+        "check" : null,
+        "command" : "COPY ~requirementsFilePath~ ./"
+    },
+    "installRequirements" :{
+        "check" : null,
+        "command" : "RUN ~pipCommand~ install -r ~requirementsFilePath~"
+    },
+    "copyAllFiles" :{
+        "check" : null,
+        "command" : "COPY . ."
+    },
+    "pythonTest" :{
+        "check" : "~testEnabled~",
+        "command" : "RUN ~pythonCommand~ ~manageFilePath~ test"
+    },
+    "exposePort" :{
+        "check" : null,
+        "command" : "EXPOSE ~portNumber~"
+    },
+    "setEntryPoint" :{
+        "check" : null,
+        "command" : "ENTRYPOINT ~pythonCommand~ ~manageFilePath~ runserver 0.0.0.0:~portNumber~"
+    }
+}
