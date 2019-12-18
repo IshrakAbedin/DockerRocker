@@ -1,8 +1,8 @@
-FROM python:3.7.5 AS python-env
+FROM maven:3.6.3-jdk-8-slim AS work-env
 WORKDIR /app
-COPY ./requirements.txt ./
-RUN pip3 install -r ./requirements.txt
+COPY ./pom.xml ./
+RUN mvn dependency:resolve
 COPY . .
-RUN python3 ./manage.py test
-EXPOSE 8000
-ENTRYPOINT python3 ./manage.py runserver 0.0.0.0:8000
+RUN mvn package
+EXPOSE 8080
+ENTRYPOINT mvn clean install tomcat7:run

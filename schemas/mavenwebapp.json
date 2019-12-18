@@ -1,0 +1,36 @@
+{
+    "environmentCount" : 1,
+    "variables" : ["mavenImageTag", "pomPath", "portNumber", "serverName"],
+    "createJavaEnvironment" :{
+        "check" : null,
+        "command" : "FROM maven:~mavenImageTag~ AS work-env"
+    },
+    "setWorkDirectoryInWorkEnvironment" :{
+        "check" : null,
+        "command" : "WORKDIR /app"
+    },
+    "copyProjectObjectModel" :{
+        "check" : null,
+        "command" : "COPY ~pomPath~ ./"
+    },
+    "resolveDependencies" :{
+        "check" : null,
+        "command" : "RUN mvn dependency:resolve"
+    },
+    "copyAllFiles" :{
+        "check" : null,
+        "command" : "COPY . ."
+    },
+    "package" :{
+        "check" : null,
+        "command" : "RUN mvn package"
+    },
+    "exposePort" :{
+        "check" : null,
+        "command" : "EXPOSE ~portNumber~"
+    },
+    "setEntryPoint" :{
+        "check" : null,
+        "command" : "ENTRYPOINT mvn clean install ~serverName~:run"
+    }
+}

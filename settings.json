@@ -1,9 +1,6 @@
 {
-	"pythonVersion" : "3.7.5",
-	"pythonCommand" : "python3",
-	"pipCommand" : "pip3",
-	"requirementsFilePath" : "./requirements.txt",
-	"testEnabled" : true,
-	"manageFilePath" : "./manage.py",
-	"portNumber" : "8000"
+	"mavenImageTag" : "3.6.3-jdk-8-slim",
+	"pomPath" : "./pom.xml",
+	"portNumber" : "8080",
+	"serverName" : "tomcat7"
 }
