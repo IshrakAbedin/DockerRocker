@@ -26,7 +26,6 @@ def getSchemaAndOutputPath():
                         help=f"Path of the output file, by default it creates {DEFAULT_OUTPUTFILE_NAME} file in calling directory", default=os.path.join(callingDir, DEFAULT_OUTPUTFILE_NAME))
 
     parsed_inputs = parser.parse_args()
-    print(parsed_inputs)
     parsed_inputs.outputPath = os.path.abspath(parsed_inputs.outputPath)
     return parsed_inputs.schema, parsed_inputs.outputPath
 
@@ -44,6 +43,7 @@ def makeSampleSettings(variables, outputPath):
 
         outputWritings += "}\n"
         outputFile.writelines(outputWritings)
+    print(f"Generated template settings JSON {outputPath}")
 
 
 main()
