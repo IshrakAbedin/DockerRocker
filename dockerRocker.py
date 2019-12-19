@@ -1,8 +1,12 @@
 #!/usr/bin/python3
 import json
+import os
+import argparse
 from sys import argv
 
 SCHEMA_ROOT = "./schemas/"
+DEFAULT_SETTINGSFILE_NAME = "rocker.json"
+DEFAULT_OUTPUTFILE_NAME = "Dockerfile"
 
 class bcolors:
     HEADER = '\033[95m'
@@ -31,15 +35,26 @@ def main():
     dockerText = getDockertext(schemaData, settingsData)
     writeDockerfile(dockerText, outputPath)
 
-def getSchemaAndSettingsPathAndOutputPath():
-    if(len(argv) == 4):
-        schema = argv[1]
-        settingsPath = argv[2]
-        outputPath = argv[3]
-        return schema, settingsPath, outputPath
+def convertPathToAbsolutePath(path):
+    if(path[0] == '/'):
+        return path
+    elif(path[0] == '.' and path[1] == '/'):
+        return os.getcwd() + str(path).lstrip('.')
     else:
-        print("Please pass schema name, settings path and output path for Dockerfile generation.")
-        exit(1)
+        return os.getcwd() + '/' + path
+
+def getSchemaAndSettingsPathAndOutputPath():
+    callingDir = os.getcwd()
+    parser = argparse.ArgumentParser(description="Generate a Dockerfile based on a settings JSON file.")
+    parser.add_argument("schema", help="Name of the framework/language")
+    parser.add_argument("-f", "--file", dest="settingsPath", help=f"Path of the settings JSON file, by default it looks for {DEFAULT_SETTINGSFILE_NAME} file in calling directory", default=callingDir+f"/{DEFAULT_SETTINGSFILE_NAME}")
+    parser.add_argument("-o", "--output", dest="outputPath", help=f"Path of the output file, by default it creates {DEFAULT_OUTPUTFILE_NAME} file in calling directory", default=callingDir+f"{DEFAULT_OUTPUTFILE_NAME}")
+
+    parsed_inputs = parser.parse_args()
+
+    parsed_inputs.settingsPath = convertPathToAbsolutePath(parsed_inputs.settingsPath)
+    parsed_inputs.outputPath = convertPathToAbsolutePath(parsed_inputs.outputPath)
+    return parsed_inputs.schema, parsed_inputs.settingsPath, parsed_inputs.outputPath
 
 def getDockertext(schemaData, settingsData):
     print(f"{bcolors.BOLD}Attempting Template Generation{bcolors.ENDC}")
