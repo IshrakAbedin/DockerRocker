@@ -1,8 +1,8 @@
-FROM python:pythonVersion demo value AS python-env
-WORKDIR /app
-COPY requirementsFilePath demo value ./
-RUN pipCommand demo value install -r requirementsFilePath demo value
+FROM node:10
+WORKDIR /app/src
+RUN npm install
+RUN npm ci --only=production
+RUN npm test
 COPY . .
-RUN pythonCommand demo value manageFilePath demo value test
-EXPOSE portNumber demo value
-ENTRYPOINT pythonCommand demo value manageFilePath demo value runserver 0.0.0.0:portNumber demo value
+EXPOSE 8081
+CMD [ "node", "app.js" ]
