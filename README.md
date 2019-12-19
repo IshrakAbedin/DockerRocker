@@ -9,12 +9,14 @@ Schemas are located under *./schemas* directory by default. Schemas are nothing 
 
 ### Command to get a template settings JSON
 ```bash
-$ python ./settingsGen.py <Schema Name> <Output Path>
+# Default output file name is rocker.json
+$ python ./rockerGen.py <Schema Name> -o <Output Path>
 ```
 
 ### Command to generate a Dockerfile
 ```bash
-$ python ./dockerRocker.py <Schema Name> <Settings Path> <Dockerfile Path>
+# Default settings file name is rocker.json and output file name is Dockerfile.
+$ python ./dockerRocker.py <Schema Name> -f <Settings File Path> -o <Dockerfile Path>
 ```
 
-*Based on the permission of the file, it might require sudo to run properly.*
+*Based on the permission of the file, it might require sudo to run properly. By default, the optional files are searched in calling directory if path is not explicitly mentioned.*
