@@ -1,6 +1,8 @@
 {
-	"mavenImageTag" : "3.6.3-jdk-8-slim",
-	"pomPath" : "./pom.xml",
-	"portNumber" : "8080",
-	"serverName" : "tomcat7"
+	"dotnetCoreVersion" : "2.1",
+	"projectPath" : "./api",
+	"testPath" : "./APi.Test",
+	"testEnabled" : false,
+	"buildEnvOutDirectory" : "/out",
+	"dllName" : "netcore-api.dll"
 }

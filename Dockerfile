@@ -1,8 +1,11 @@
-FROM maven:3.6.3-jdk-8-slim AS work-env
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1 AS build-env
 WORKDIR /app
-COPY ./pom.xml ./
-RUN mvn dependency:resolve
+COPY ./*.sln ./
+COPY ./api/*.csproj ./api/
+RUN dotnet restore
 COPY . .
-RUN mvn package
-EXPOSE 8080
-ENTRYPOINT mvn clean install tomcat7:run
+RUN dotnet publish -c Release -o /out
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.1
+WORKDIR /app
+COPY --from=build-env /out .
+ENTRYPOINT dotnet netcore-api.dll

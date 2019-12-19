@@ -48,11 +48,12 @@ def getDockertext(schemaData, settingsData):
         if(not(key in ["variables", "environmentCount"])):
             if(schemaData[key]["check"] == None):
                 templateDockertext += schemaData[key]["command"] + "\n"
+                print(f"{symbols.APPROVAL} [{bcolors.OKGREEN}{key}{bcolors.ENDC}] :: Template Generation Complete")
             else:
                 bindedVariable = str(schemaData[key]["check"]).strip("~")
                 if(settingsData[bindedVariable]):
                     templateDockertext += schemaData[key]["command"] + "\n"
-            print(f"{symbols.APPROVAL} [{bcolors.OKGREEN}{key}{bcolors.ENDC}] :: Template Generation Complete")
+                    print(f"{symbols.APPROVAL} [{bcolors.OKGREEN}{key}{bcolors.ENDC}] :: Template Generation Complete")
 
     print(f"{bcolors.BOLD}{bcolors.OKGREEN}Template Generation Complete{bcolors.ENDC}")
     dockerText = getDockertextFromTemplate(templateDockertext, settingsData)
