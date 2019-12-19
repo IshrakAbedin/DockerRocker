@@ -48,7 +48,7 @@ def getSchemaAndSettingsPathAndOutputPath():
     parser = argparse.ArgumentParser(description="Generate a Dockerfile based on a settings JSON file.")
     parser.add_argument("schema", help="Name of the framework/language")
     parser.add_argument("-f", "--file", dest="settingsPath", help=f"Path of the settings JSON file, by default it looks for {DEFAULT_SETTINGSFILE_NAME} file in calling directory", default=callingDir+f"/{DEFAULT_SETTINGSFILE_NAME}")
-    parser.add_argument("-o", "--output", dest="outputPath", help=f"Path of the output file, by default it creates {DEFAULT_OUTPUTFILE_NAME} file in calling directory", default=callingDir+f"{DEFAULT_OUTPUTFILE_NAME}")
+    parser.add_argument("-o", "--output", dest="outputPath", help=f"Path of the output file, by default it creates {DEFAULT_OUTPUTFILE_NAME} file in calling directory", default=callingDir+f"/{DEFAULT_OUTPUTFILE_NAME}")
 
     parsed_inputs = parser.parse_args()
 
