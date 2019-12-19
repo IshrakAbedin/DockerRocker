@@ -2,7 +2,7 @@
 import json
 import os
 import argparse
-from sys import argv
+from pathConverter import convertPathToAbsolutePath
 
 SCHEMA_ROOT = "./schemas/"
 DEFAULT_SETTINGSFILE_NAME = "rocker.json"
@@ -34,14 +34,6 @@ def main():
         settingsData = json.load(settingsFile)
     dockerText = getDockertext(schemaData, settingsData)
     writeDockerfile(dockerText, outputPath)
-
-def convertPathToAbsolutePath(path):
-    if(path[0] == '/'):
-        return path
-    elif(path[0] == '.' and path[1] == '/'):
-        return os.getcwd() + str(path).lstrip('.')
-    else:
-        return os.getcwd() + '/' + path
 
 def getSchemaAndSettingsPathAndOutputPath():
     callingDir = os.getcwd()

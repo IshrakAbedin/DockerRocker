@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 import json
-import os
 import argparse
-from sys import argv
+import os
+from pathConverter import convertPathToAbsolutePath
 
 SCHEMA_ROOT = "./schemas/"
 DEFAULT_OUTPUTFILE_NAME = "rocker.json"
@@ -15,14 +15,6 @@ def main():
         schemaData = json.load(schemaFile)
     makeSampleSettings(schemaData["variables"], outputPath)
     return
-
-def convertPathToAbsolutePath(path):
-    if(path[0] == '/'):
-        return path
-    elif(path[0] == '.' and path[1] == '/'):
-        return os.getcwd() + str(path).lstrip('.')
-    else:
-        return os.getcwd() + '/' + path
 
 def getSchemaAndOutputPath():
     callingDir = os.getcwd()

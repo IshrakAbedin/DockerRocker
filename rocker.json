@@ -1,0 +1,6 @@
+{
+	"mavenImageTag" : "mavenImageTag demo value",
+	"pomPath" : "pomPath demo value",
+	"portNumber" : "portNumber demo value",
+	"serverName" : "serverName demo value"
+}
