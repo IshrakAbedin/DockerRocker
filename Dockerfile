@@ -1,8 +1,8 @@
-FROM maven:mavenImageTag demo value AS work-env
+FROM python:pythonVersion demo value AS python-env
 WORKDIR /app
-COPY pomPath demo value ./
-RUN mvn dependency:resolve
+COPY requirementsFilePath demo value ./
+RUN pipCommand demo value install -r requirementsFilePath demo value
 COPY . .
-RUN mvn package
+RUN pythonCommand demo value manageFilePath demo value test
 EXPOSE portNumber demo value
-ENTRYPOINT mvn clean install serverName demo value:run
+ENTRYPOINT pythonCommand demo value manageFilePath demo value runserver 0.0.0.0:portNumber demo value
