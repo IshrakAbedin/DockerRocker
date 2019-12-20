@@ -1,9 +1,8 @@
 {
-	"pythonVersion" : "pythonVersion demo value",
-	"pythonCommand" : "pythonCommand demo value",
-	"pipCommand" : "pipCommand demo value",
-	"requirementsFilePath" : "requirementsFilePath demo value",
-	"testEnabled" : "testEnabled demo value",
-	"manageFilePath" : "manageFilePath demo value",
-	"portNumber" : "portNumber demo value"
+	"nodeVersion": "10",
+	"workDir": "/app/src",
+	"testEnabled": true,
+	"production": true,
+	"exposePort": 8081,
+	"entryFile": "app.js"
 }

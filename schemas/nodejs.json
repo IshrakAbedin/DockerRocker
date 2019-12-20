@@ -1,0 +1,43 @@
+{
+	"environmentCount": 1,
+	"variables": [
+		"nodeVersion",
+		"workDir",
+		"testEnabled",
+		"production",
+		"exposePort",
+		"entryFile"
+	],
+	"createNodeEnvironment": {
+		"check": null,
+		"command": "FROM node:~nodeVersion~"
+	},
+	"createWorkDirectory": {
+		"check": null,
+		"command": "WORKDIR ~workDir~"
+	},
+	"installPackages": {
+		"check": null,
+		"command": "RUN npm install"
+	},
+	"makeProductionBuild": {
+		"check": "~production~",
+		"command": "RUN npm ci --only=production"
+	},
+	"testProject": {
+		"check": "~testEnabled~",
+		"command": "RUN npm test"
+	},
+	"copyProjectFiles": {
+		"check": null,
+		"command": "COPY . ."
+	},
+	"exposePort": {
+		"check": null,
+		"command": "EXPOSE ~exposePort~"
+	},
+	"setEntryPoint": {
+		"check": null,
+		"command": "CMD [ \"node\", \"~entryFile~\" ]"
+	}
+}
