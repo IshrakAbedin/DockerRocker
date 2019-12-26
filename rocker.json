@@ -1,8 +1,0 @@
-{
-	"nodeVersion": "10",
-	"workDir": "/app/src",
-	"testEnabled": true,
-	"production": true,
-	"exposePort": 8081,
-	"entryFile": "app.js"
-}

@@ -1,8 +1,0 @@
-{
-	"dotnetCoreVersion" : "dotnetCoreVersion demo value",
-	"projectPath" : "projectPath demo value",
-	"testPath" : "testPath demo value",
-	"testEnabled" : "testEnabled demo value",
-	"buildEnvOutDirectory" : "buildEnvOutDirectory demo value",
-	"dllName" : "dllName demo value"
-}
